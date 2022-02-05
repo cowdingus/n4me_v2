@@ -1,0 +1,38 @@
+.card {
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 1em;
+
+  border: 1px solid gray;
+  border-radius: 5px;
+
+  box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.3);
+}
+
+.card-title {
+  margin: 0px;
+  font-size: 1.4em;
+}
+
+.card-description {
+  flex-grow: 1;
+
+  margin-top: 6px;
+}
+
+.card-details {
+  display: flex;
+  align-items: center;
+
+  gap: 0px 3px;
+
+  font-size: 0.9em;
+  color: gray;
+}
+
+.card:hover {
+  transform: scale(101%);
+  transition: 500ms;
+}

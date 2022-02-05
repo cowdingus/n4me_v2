@@ -4,5 +4,9 @@
   grid-area: main;
 
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-rows: repeat(auto-fill, 150px);
+
+  gap: 16px;
+
+  padding: 20px;
 }
