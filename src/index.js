@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './css/index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+import 'remixicon/fonts/remixicon.css';
 
 ReactDOM.render(
   <React.StrictMode>

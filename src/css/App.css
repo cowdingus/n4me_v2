@@ -1,0 +1,12 @@
+.app {
+  display: grid;
+
+  min-height: 100vh;
+  min-width: 100vw;
+
+  grid-template-columns: 64px auto;
+  grid-template-rows: auto;
+
+  grid-template-areas:
+    "sidebar main"
+}
