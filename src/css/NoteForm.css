@@ -1,0 +1,57 @@
+.note-form {
+  position: fixed;
+
+  height: 100vh;
+  width: 100vw;
+
+  background-color: rgba(0, 0, 0, 0.3);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.note-form-form {
+  display: flex;
+  flex-direction: column;
+
+  align-items: stretch;
+
+  min-width: 200px;
+  min-height: 300px;
+
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 10px;
+
+  padding: 1em;
+}
+
+.note-form-form input {
+  font-size: 1.2em;
+
+  border: 0px;
+
+  margin-bottom: 1em;
+}
+
+.note-form-form textarea:focus, .note-form-form input:focus {
+  outline: none;
+}
+
+.note-form-form textarea {
+  border: 0px;
+  box-shadow: none;
+
+  flex-grow: 1;
+  resize: none;
+}
+
+.note-form-form-btn-container {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.note-form-form button {
+  font-size: 1.5em;
+}
