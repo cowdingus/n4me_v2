@@ -2,15 +2,11 @@ import '../css/Sidebar.css';
 
 import logo from '../logo.svg';
 
-function Sidebar() {
-  function addNote() {
-
-  }
-
+function Sidebar({addHandler}) {
   return (
     <nav className="sidebar">
-      <img src={logo} className="sidebar-logo"/>
-      <button onClick={addNote} class="sidebar-btn"><i class="ri-add-fill"></i></button>
+      <img src={logo} className="sidebar-logo" alt=""/>
+      <button onClick={addHandler} className="sidebar-btn"><i className="ri-add-fill"></i></button>
     </nav>
   );
 }

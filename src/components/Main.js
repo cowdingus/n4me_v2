@@ -1,10 +1,18 @@
-import '../css/Main.css';
-import NoteCard from './NoteCard';
+import "../css/Main.css";
+import NoteCard from "./NoteCard";
 
-function Main() {
+function Main({ notes, editHandler }) {
   return (
-    <main class="main-section">
-      {Array(8).fill(0).map((_, i) => <NoteCard />)}
+    <main className="main-section">
+      {notes.map((note) =>
+        <NoteCard
+          key={note.id}
+          title={note.title}
+          content={note.content}
+          creationDate={Date.now()}
+          lastEditDate={Date.now()}
+        />
+      )}
     </main>
   );
 }
