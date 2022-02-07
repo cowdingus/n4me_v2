@@ -5,6 +5,7 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import 'remixicon/fonts/remixicon.css';
 import './css/Reset.css';
+import './css/Root.css';
 
 ReactDOM.render(
   <React.StrictMode>
