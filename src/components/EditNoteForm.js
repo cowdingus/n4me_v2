@@ -2,7 +2,7 @@ import '../css/NoteForm.css';
 
 import {useState, useEffect} from 'react';
 
-function EditNoteForm({fillData, isVisible, handleSubmit, handleClose}) {
+function EditNoteForm({fillData, isVisible, handleSubmit, handleClose, handleDelete}) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -49,6 +49,9 @@ function EditNoteForm({fillData, isVisible, handleSubmit, handleClose}) {
           </button>
           <button onClick={handleClose}>
             <i className="ri-close-line"></i>
+          </button>
+          <button onClick={handleDelete.bind(null, fillData.id)}>
+            <i className="ri-delete-bin-line"></i>
           </button>
         </div>
       </form>

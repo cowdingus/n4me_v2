@@ -68,6 +68,15 @@ function App() {
     setFocusedNote({id: -1, title: "", content: ""});
   }
 
+  function handleDeleteNote(id, event) {
+    event.preventDefault();
+
+    noteController.delete(id);
+
+    setIsEditingNote(false);
+    setFocusedNote({id: -1, title: "", content: ""});
+  }
+
   const [isAddingNote, setIsAddingNote] = useState(false);
   const [isEditingNote, setIsEditingNote] = useState(false);
   const [notes, noteController] = useNotes(new WebStorageNoteModel());
@@ -84,6 +93,7 @@ function App() {
     <EditNoteForm 
       handleClose={handleCloseEditNoteForm}
       handleSubmit={handleEditNoteSubmit}
+      handleDelete={handleDeleteNote}
       isVisible={isEditingNote}
       fillData={focusedNote}
     />
