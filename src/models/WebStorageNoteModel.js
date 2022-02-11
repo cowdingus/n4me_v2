@@ -47,14 +47,10 @@ class WebStorageNoteModel {
   }
 
   put(title, content, id) {
-    const notes = this._getNotes();
+    let notes = this._getNotes();
 
-    for (let note of notes) {
-      if (note.id === id) {
-        note = {...note, title, content};
-        break;
-      }
-    }
+    const index = notes.findIndex((note) => note.id === id);
+    notes[index] = {id, title, content};
 
     this._setNotes(notes);
   }
