@@ -3,8 +3,8 @@ class WebStorageNoteModel {
     this.storage = localStorage;
 
     if (!this.storage.getItem("lastNoteId")) {
-      this.storage.setItem("notes", JSON.stringify([]));
-      this.storage.setItem("lastNoteId", JSON.stringify(0));
+      this._setNotes([]);
+      this._setLastNoteId(0);
     }
   }
 
@@ -27,6 +27,11 @@ class WebStorageNoteModel {
   read(id) {
     const notes = this._getNotes();
 
+    notes.forEach(note => {
+      note.creationDate = new Date(note.creationDate);
+      note.lastEditDate = new Date(note.lastEditDate);
+    });
+
     if (id === undefined) {
       return notes;
     }
@@ -40,7 +45,10 @@ class WebStorageNoteModel {
     const notes = this._getNotes();
     const lastNoteId = this._getLastNoteId();
 
-    this._setNotes([...notes, {id: lastNoteId + 1, title, content}]);
+    const creationDate = new Date();
+    const editDate = new Date();
+
+    this._setNotes([...notes, {id: lastNoteId + 1, title, content, creationDate, lastEditDate: editDate}]);
     this._setLastNoteId(lastNoteId + 1);
 
     return lastNoteId;
@@ -49,8 +57,10 @@ class WebStorageNoteModel {
   put(title, content, id) {
     let notes = this._getNotes();
 
-    const index = notes.findIndex((note) => note.id === id);
-    notes[index] = {id, title, content};
+    const editDate = new Date();
+
+    const index = notes.findIndex(note => note.id == id);
+    notes[index] = {...notes[index], title, content, lastEditDate: editDate};
 
     this._setNotes(notes);
   }
@@ -59,7 +69,7 @@ class WebStorageNoteModel {
     const notes = this._getNotes();
 
     this._setNotes(notes.filter((note) => {
-      return note.id !== id;
+      return note.id != id;
     }));
   }
 }

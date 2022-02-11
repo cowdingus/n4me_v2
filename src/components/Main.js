@@ -10,8 +10,8 @@ function Main({ notes, editHandler }) {
           id={note.id}
           title={note.title}
           content={note.content}
-          creationDate={new Date()}
-          lastEditDate={new Date()}
+          creationDate={note.creationDate}
+          lastEditDate={note.lastEditDate}
           handleClick={editHandler}
         />
       )}
