@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './css/index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+
+import './css/index.css';
 import 'remixicon/fonts/remixicon.css';
+
 import './css/Reset.css';
 import './css/Root.css';
+import './css/Utilities.css';
 
 ReactDOM.render(
   <React.StrictMode>

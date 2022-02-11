@@ -7,10 +7,12 @@ function Main({ notes, editHandler }) {
       {notes.map((note) =>
         <NoteCard
           key={note.id}
+          id={note.id}
           title={note.title}
           content={note.content}
-          creationDate={Date.now()}
-          lastEditDate={Date.now()}
+          creationDate={new Date()}
+          lastEditDate={new Date()}
+          handleClick={editHandler}
         />
       )}
     </main>
