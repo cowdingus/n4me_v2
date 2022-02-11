@@ -1,13 +1,87 @@
 import '../css/NoteCard.css';
 
-function NoteCard({title, content, lastEditDate, creationDate}) {
+function getTimeDifference(a, b) {
+  if (b.getTime() > a.getTime()) {
+    [a, b] = [b, a];
+  }
+
+  let msec = a.getTime() - b.getTime();
+  const hoursAgo = Math.floor(msec / 1000 / 60 / 60);
+  msec -= hoursAgo * 1000 * 60 * 60;
+  const minutesAgo = Math.floor(msec / 1000 / 60);
+  msec -= minutesAgo * 1000 * 60;
+  const secondsAgo = Math.floor(msec / 1000);
+  msec -= secondsAgo * 1000;
+
+  return [hoursAgo, minutesAgo, secondsAgo];
+}
+
+function getTimeSince(date) {
+  const [hoursAgo, minutesAgo, secondsAgo] = getTimeDifference(new Date(), date);
+
+  // is more than or eq to a day and less than a week
+  if (hoursAgo >= 24 && hoursAgo < 168) {
+    const daysAgo = Math.floor(hoursAgo / 24);
+
+    if (daysAgo == 1) return "Yesterday";
+    return `${daysAgo} days ago`;
+
+    // is more than or eq to a week and less than a month
+  } else if (hoursAgo >= 168 && hoursAgo < 672) {
+    const weeksAgo = Math.floor(hoursAgo / 24 / 7);
+
+    if (weeksAgo == 1) {
+      return "A week ago";
+    } else {
+      return `${weeksAgo} weeks ago`;
+    }
+
+    // is more than or eq to a month and less than a year
+  } else if (hoursAgo >= 672 && hoursAgo < 8064) {
+    const monthsAgo = Math.floor(hoursAgo / 24 / 7 / 4);
+
+    if (monthsAgo == 1) {
+      return "A month ago";
+    } else {
+      return `${monthsAgo} months ago`;
+    }
+
+    // is more than or eq to a year
+  } else if (hoursAgo >= 8064) {
+    const yearsAgo = Math.floor(hoursAgo / 24 / 7 / 4 / 12);
+
+    if (yearsAgo == 1) {
+      return "A year ago";
+    } else {
+      return `${yearsAgo} years ago`;
+    }
+  }
+
+  // less than a day and more than an hour
+  if (hoursAgo > 0) {
+    if (hoursAgo == 1) return "An hour ago";
+    else return `${hoursAgo} hours ago`;
+  } else if (minutesAgo > 0) {
+    if (minutesAgo == 1) return "A minute ago";
+    else return `${minutesAgo} minutes ago`;
+  } else if (secondsAgo >= 0) {
+    return "Just now";
+  }
+
+  return "invalid";
+}
+
+function NoteCard({id, title, content, lastEditDate, creationDate, handleClick}) {
+  const creationDateStr = creationDate.getFullYear()+'-'+(creationDate.getMonth()+1)+'-'+creationDate.getDate();
+  const lastEditDateStr = getTimeSince(lastEditDate);
+
   return (
-    <div className="card">
+    <div className="card" onClick={() => handleClick(id, title, content)}>
       <h2 className="card-title">{title}</h2>
       <p className="card-content">{content}</p>
       <span className="card-details">
-        <i className="ri-time-line"></i><span className="card-detail">{creationDate}</span>
-        <i className="ri-pencil-line"></i><span className="card-detail">{lastEditDate}</span>
+        <i className="ri-time-line"></i><span className="card-detail">{creationDateStr}</span>
+        <i className="ri-pencil-line"></i><span className="card-detail">{lastEditDateStr}</span>
       </span>
     </div>
   );
