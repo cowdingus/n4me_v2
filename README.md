@@ -1,3 +1,3 @@
 # Note4Me
 
-A note taking app w/ a bit of insanity.
+A note taking app made w/ a bit of insanity.
