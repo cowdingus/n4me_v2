@@ -1,3 +1,13 @@
+function Note({id, title, content, creationDate = Date(), editDate = Date(), group = "", tags = []}) {
+  this.id = id;
+  this.title = title;
+  this.content = content;
+  this.creationDate = new Date(creationDate);
+  this.editDate = new Date(editDate);
+  this.group = group;
+  this.tags = tags;
+}
+
 class WebStorageNoteModel {
   constructor() {
     this.storage = localStorage;
@@ -9,7 +19,7 @@ class WebStorageNoteModel {
   }
 
   _getNotes() {
-    return JSON.parse(this.storage.getItem("notes"));
+    return (JSON.parse(this.storage.getItem("notes"))).map(note => new Note(note));
   }
 
   _getLastNoteId() {
@@ -27,11 +37,6 @@ class WebStorageNoteModel {
   read(id) {
     const notes = this._getNotes();
 
-    notes.forEach(note => {
-      note.creationDate = new Date(note.creationDate);
-      note.lastEditDate = new Date(note.lastEditDate);
-    });
-
     if (id === undefined) {
       return notes;
     }
@@ -41,26 +46,26 @@ class WebStorageNoteModel {
     }
   }
 
-  add(title, content) {
+  add({title, content, group = "", tags = []}) {
     const notes = this._getNotes();
     const lastNoteId = this._getLastNoteId();
 
     const creationDate = new Date();
     const editDate = new Date();
 
-    this._setNotes([...notes, {id: lastNoteId + 1, title, content, creationDate, lastEditDate: editDate}]);
+    this._setNotes([...notes, new Note({id: lastNoteId + 1, title, content, creationDate, editDate, group, tags})]);
     this._setLastNoteId(lastNoteId + 1);
 
     return lastNoteId;
   }
 
-  put(title, content, id) {
+  put({title, content, group, tags, id}) {
     let notes = this._getNotes();
 
     const editDate = new Date();
 
     const index = notes.findIndex(note => note.id == id);
-    notes[index] = {...notes[index], title, content, lastEditDate: editDate};
+    notes[index] = {...notes[index], title, content, group, tags, editDate};
 
     this._setNotes(notes);
   }
@@ -74,4 +79,5 @@ class WebStorageNoteModel {
   }
 }
 
+export {Note};
 export default WebStorageNoteModel;

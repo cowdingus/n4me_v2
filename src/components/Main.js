@@ -1,27 +1,39 @@
 import "../css/Main.css";
 import NoteCard from "./NoteCard";
 
-import Masonry from "react-masonry-css"
+import Masonry from "react-masonry-css";
 
 function Main({ notes, editHandler }) {
+  const groupBy = (data, key) => {
+    return data.reduce(function (storage, item) {
+      var group = item[key];
+
+      storage[group] = storage[group] || [];
+
+      storage[group].push(item);
+
+      return storage;
+    }, {});
+  };
+
+  const notesByGroups = groupBy(notes, "group");
+
   return (
     <main className="main-section">
-      <Masonry
-        breakpointCols={4}
-        className="main-section-grid"
-        columnClassName="main-section-grid_column">
-      {notes.map((note) =>
-        <NoteCard
-          key={note.id}
-          id={note.id}
-          title={note.title}
-          content={note.content}
-          creationDate={note.creationDate}
-          lastEditDate={note.lastEditDate}
-          handleClick={editHandler}
-        />
-      )}
-      </Masonry>
+      {Object.entries(notesByGroups).map(([groupName, notes]) => (
+        <div key={groupName}>
+          <h1 style={{marginTop: 0}}>{groupName ? groupName : "Ungrouped Notes"}</h1>
+          <Masonry
+            breakpointCols={4}
+            className="main-section-grid"
+            columnClassName="main-section-grid_column"
+          >
+            {notes.map((note) => (
+              <NoteCard key={note.id} note={note} handleClick={editHandler} />
+            ))}
+          </Masonry>
+        </div>
+      ))}
     </main>
   );
 }

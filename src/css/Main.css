@@ -18,3 +18,7 @@
   padding-left: 16px; /* gutter size */
   background-clip: padding-box;
 }
+
+.main-section-grid_column > .card {
+  margin-bottom: 16px;
+}

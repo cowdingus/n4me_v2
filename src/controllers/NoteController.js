@@ -12,9 +12,9 @@ export default class NoteController {
     }
   }
 
-  add(title, content) {
+  add(note) {
     try {
-      const insertId = this.model.add(title, content);
+      const insertId = this.model.add(note);
       this.setNotesFn(this.model.read());
       return insertId;
     } catch (e) {
@@ -22,9 +22,9 @@ export default class NoteController {
     }
   }
 
-  put(title, content, id) {
+  put(note) {
     try {
-      this.model.put(title, content, id);
+      this.model.put(note);
       this.setNotesFn(this.model.read());
     } catch (e) {
       console.error("Failed to update note: " + e.message);

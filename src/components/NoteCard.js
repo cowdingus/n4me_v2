@@ -71,17 +71,17 @@ function getTimeSince(date) {
   return "invalid";
 }
 
-function NoteCard({id, title, content, lastEditDate, creationDate, handleClick}) {
-  const creationDateStr = creationDate.getFullYear()+'-'+(creationDate.getMonth()+1)+'-'+creationDate.getDate();
-  const lastEditDateStr = getTimeSince(lastEditDate);
+function NoteCard({note, handleClick}) {
+  const creationDateStr = note.creationDate.getFullYear()+'-'+(note.creationDate.getMonth()+1)+'-'+note.creationDate.getDate();
+  const editDateStr = getTimeSince(note.editDate);
 
   return (
-    <div className="card" onClick={() => handleClick(id, title, content)}>
-      <h2 className="card-title">{title}</h2>
-      <p className="card-content">{content}</p>
+    <div className="card" onClick={() => handleClick(note)}>
+      <h2 className="card-title">{note.title}</h2>
+      <p className="card-content">{note.content}</p>
       <span className="card-details">
         <i className="ri-time-line"></i><span className="card-detail">{creationDateStr}</span>
-        <i className="ri-pencil-line"></i><span className="card-detail">{lastEditDateStr}</span>
+        <i className="ri-pencil-line"></i><span className="card-detail">{editDateStr}</span>
       </span>
     </div>
   );
