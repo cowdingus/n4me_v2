@@ -38,3 +38,9 @@
   transform: scale(101%);
   transition: 150ms;
 }
+
+.card-tags {
+  padding-top: 8px;
+  display: flex;
+  gap: 4px;
+}

@@ -1,4 +1,5 @@
 import '../css/NoteCard.css';
+import Badge from './Badge';
 
 function getTimeDifference(a, b) {
   if (b.getTime() > a.getTime()) {
@@ -79,10 +80,15 @@ function NoteCard({note, handleClick}) {
     <div className="card" onClick={() => handleClick(note)}>
       <h2 className="card-title">{note.title}</h2>
       <p className="card-content">{note.content}</p>
-      <span className="card-details">
+      <div className="card-details">
         <i className="ri-time-line"></i><span className="card-detail">{creationDateStr}</span>
         <i className="ri-pencil-line"></i><span className="card-detail">{editDateStr}</span>
-      </span>
+      </div>
+      <div className="card-tags">
+        {note?.tags?.map((tag, index) => (
+          tag ? <Badge text={tag} /> : ""
+        ))}
+      </div>
     </div>
   );
 }

@@ -24,7 +24,12 @@ function Main({ notes, editHandler }) {
         <div key={groupName}>
           <h1 style={{marginTop: 0}}>{groupName ? groupName : "Ungrouped Notes"}</h1>
           <Masonry
-            breakpointCols={4}
+            breakpointCols={{
+              default: 4,
+              1100: 3,
+              700: 2,
+              500: 1
+            }}
             className="main-section-grid"
             columnClassName="main-section-grid_column"
           >
